@@ -478,6 +478,7 @@ function resizeCanvas() {
 }
 
 function getNodeAbsPos(node) {
+  if (!node) return { x: 100, y: 100 };
   return {
     x: node.rx * canvas.width,
     y: node.ry * canvas.height
@@ -537,9 +538,8 @@ function drawCanvas() {
       if (drawnRoads.has(pairKey)) continue;
       drawnRoads.add(pairKey);
 
-      let p2 = getNodeAbsPos(pairKey.split('-')[1]);
       let vNode = cityGraph.intersections[v];
-      let p2Pos = getNodeAbsPos(vNode);
+      let p2 = getNodeAbsPos(vNode);
 
       let isPath = false;
       if (activeRoutePath.length > 1) {
@@ -554,7 +554,7 @@ function drawCanvas() {
 
       ctx.beginPath();
       ctx.moveTo(p1.x, p1.y);
-      ctx.lineTo(p2Pos.x, p2Pos.y);
+      ctx.lineTo(p2.x, p2.y);
 
       if (isPath) {
         ctx.strokeStyle = "#09090b"; // Bold Black Vector Path
@@ -576,8 +576,8 @@ function drawCanvas() {
       ctx.shadowBlur = 0;
 
       // Traffic Signal Light Indicators (Red / Yellow / Green)
-      let midX = (p1.x + p2Pos.x) / 2;
-      let midY = (p1.y + p2Pos.y) / 2;
+      let midX = (p1.x + p2.x) / 2;
+      let midY = (p1.y + p2.y) / 2;
       ctx.beginPath();
       ctx.arc(midX, midY, 6, 0, Math.PI * 2);
       ctx.fillStyle = road.emergencyOverride ? "#0284c7" :
