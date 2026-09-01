@@ -1,0 +1,32 @@
+# Security & Secret Hardening
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+*.p12
+*.secret
+secrets/
+config/credentials.json
+*.log
+
+# C++ Build & Binaries
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+cpp/emergency_sim
+cpp/main
+
+# Python ML Artifacts & Dependencies
+__pycache__/
+*.py[cod]
+*$py.class
+ml/model.pkl
+.venv/
+env/
+venv/
+ENV/
+.DS_Store
